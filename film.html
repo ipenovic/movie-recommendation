@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<title>Diplomski</title>
+<meta charset="UTF-8">
+<link type="text/css" href="css/index.css" rel="stylesheet"/>
+<script type="text/javascript" src="js/film.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<body class="w3-content" style="max-width:1200px">
+<!-- Sidebar/menu -->
+<div class="w3-sidebar w3-bar-block w3-white w3-collapse w3-top" style="z-index:2;width:250px" id="mySidebar">
+  <div class="w3-container w3-display-container w3-padding-16">
+        <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-display-topright"></i>
+        <h3 class="w3-wide"><b>DIPLOMSKI</b></h3>
+      </div>
+      <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
+        <a class="w3-bar-item w3-button" onclick="window.location='index.html';" style="width:auto;">Naslovnica</a>
+        <a><p></p></a>
+        <a class="w3-bar-item w3-button" onclick="w3_close();" style="width:auto;" id="odjava">Logout <i class="fa fa-sign-out"></i></a>
+      </div>
+    </nav>
+</div>
+
+<!-- Top menu on small screens -->
+<header class="w3-bar w3-top w3-hide-large w3-black w3-xlarge" style="z-index:1">
+  <div class="w3-bar-item w3-padding-24 w3-wide">DIPLOMSKI</div>
+  <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding-24 w3-right" onclick="w3_open()"><i class="fa fa-bars"></i></a>
+</header>
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer;z-index:1" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:250px">
+
+  <!-- Push down content on small screens -->
+  <div class="w3-hide-large" style="margin-top:83px"></div>
+
+  <!-- Top header -->
+  <header class="w3-container w3-xlarge">
+    <p class="w3-left w3-button" id="logiranikorisnik">
+      <a>Filmovi</a>
+    </p>
+    <p class="w3-right" id='logoutbtn' style="display:none">
+      <a class="w3-bar-item w3-button" style="width:auto;" id="odjava">Logout <i class="fa fa-sign-out"></i></a>
+    </p>
+  </header>
+
+  <div class="w3-container w3-text-grey">
+    <p id='sadrzaj'></p>
+  </div>
+
+  <!-- Product grid -->
+  <div class="w3-row">
+    <div id="filmovi"></div>
+  </div>
+
+  <div class="w3-black w3-center w3-padding-24">Powered by Ivan</div>
+</div>
+
+<div id="myModal" class="modalGreska">
+  <div class="modalGreska-content">
+    <span class="closeModalGreska">&times;</span>
+    <p>Some text in the Modal..</p>
+  </div>
+</div>
+
+<script>
+// Script to open and close sidebar
+function w3_open() {
+    document.getElementById("mySidebar").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+}
+
+function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+}
+
+// Get the modal
+var modallogin = document.getElementById('login');
+var modalsignup = document.getElementById('signup');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modallogin) {
+        modallogin.style.display = "none";
+    }
+	if (event.target == modalsignup) {
+        modalsignup.style.display = "none";
+    }
+}
+</script>
+
+</body>
+</html>

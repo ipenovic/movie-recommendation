@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<title>Diplomski</title>
+<meta charset="UTF-8">
+<link type="text/css" href="css/index.css" rel="stylesheet"/>
+<script type="text/javascript" src="js/index.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<body class="w3-content" style="max-width:1200px">
+<!-- Sidebar/menu -->
+<div class="w3-sidebar w3-bar-block w3-white w3-collapse w3-top" style="z-index:2;width:250px" id="mySidebar">
+  <div class="w3-container w3-display-container w3-padding-16">
+        <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-display-topright"></i>
+        <h3 class="w3-wide"><b>DIPLOMSKI</b></h3>
+      </div>
+      <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
+        <a class="w3-bar-item w3-button" id='prijava' onclick="document.getElementById('mySidebar').style.position='relative';w3_close();document.getElementById('login').style.display='block'" style="width:auto;">Prijava</a>
+        <a class="w3-bar-item w3-button" id='registracija' onclick="w3_close();document.getElementById('signup').style.display='block'" style="width:auto;">Registracija</a>
+        <a><p></p></a>
+        <a class="w3-bar-item w3-button" onclick="w3_close();" style="width:auto;" id="preporuka">Preporuči filmove</a>
+        <a><p></p></a>
+        <a onclick="myAccFunc()" href="javascript:void(0)" class="w3-button w3-block w3-left-align" id="myBtn">
+          Sortiraj prema <i class="fa fa-caret-down"></i>
+        </a>
+        <div id="demoAcc" class="w3-bar-block w3-hide w3-padding-large w3-medium">
+          <a href="#movie" onclick="sortiraj('ocjene');w3_close();" class="w3-bar-item w3-button" id="sortOcjene">Ocjenama</a>
+          <a href="#movie" onclick="sortiraj('godine');w3_close();" class="w3-bar-item w3-button" id="sortGodine">Godinama</a>
+          <a href="#movie" onclick="sortiraj('zanr');w3_close();" class="w3-bar-item w3-button" id="sortZanr">Žanru</a>
+        </div>
+        <a><p></p></a>
+        <a class="w3-bar-item w3-button" onclick="w3_close();" style="width:auto;" id="odjava">Logout <i class="fa fa-sign-out"></i></a>
+        <a><p><br><br><br><br><br><br></p></a>
+        <a class="w3-bar-item w3-button" onclick="w3_close();" style="width:auto;" id="loadaj">Napuni bazu</a>
+        <a class="w3-bar-item w3-button" onclick="w3_close();" style="width:auto;" id="birisifilmove">Brisi filmove</a>
+      </div>
+    </nav>
+</div>
+
+<!-- Top menu on small screens -->
+<header class="w3-bar w3-top w3-hide-large w3-black w3-xlarge" style="z-index:1">
+  <div class="w3-bar-item w3-padding-24 w3-wide">DIPLOMSKI</div>
+  <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding-24 w3-right" onclick="w3_open()"><i class="fa fa-bars"></i></a>
+</header>
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer;z-index:1" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:250px">
+
+  <!-- Push down content on small screens -->
+  <div class="w3-hide-large" style="margin-top:83px"></div>
+
+  <!-- Top header -->
+  <header class="w3-container w3-xlarge">
+    <p class="w3-left w3-button" id="logiranikorisnik">
+      <a>Filmovi</a>
+    </p>
+  </header>
+
+  <!-- Image header -->
+  <div class="w3-display-container w3-container">
+	<img class="w3-grayscale-min" src="img/filmovi.jpg" alt="Jeans" style="width:100%">
+	<div class="w3-display-topleft w3-text-white" style="padding:24px 48px">
+    <h1 class="w3-jumbo w3-hide-small"><p><br></h1>
+	  <h1 class="w3-jumbo w3-hide-small"></h1>
+	  <h1 class="w3-hide-large w3-hide-medium"><p></p></h1>
+    <h1 class="w3-jumbo w3-hide-small"><p></h1>
+	  <h1 class="w3-hide-small"></h1>
+	  <p><a href="#movie" class="w3-button w3-black w3-padding-large w3-large">Pregledaj filmove</a></p>
+	</div>
+  </div>
+
+  <div class="w3-container w3-text-grey" id="movie">
+    <p>Najbolje ocjenjeni filmovi:</p>
+  </div>
+
+  <!-- Product grid -->
+  <div class="w3-row">
+    <div id="filmovi"></div>
+  </div>
+
+  <div class="w3-black w3-center w3-padding-24">Powered by Ivan</div>
+</div>
+
+<!-- Login form -->
+<div id="login" class="modal" style="z-index:3">
+  <span onclick="document.getElementById('login').style.display='none';document.getElementById('loginmessage').innerHTML=''" class="close" title="Close Modal">&times;</span>
+  <form class="modal-content">
+    <div class="container">
+      <h1>Prijava</h1>
+      <p></p>
+      <hr>
+      <label for="email"><b>Email</b></label>
+      <input type="text" placeholder="Enter Email" name="email" required id="emailL">
+
+      <label for="psw"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="psw" required id="passwordL">
+
+      <label id="loginmessage"><br><br></label>
+
+
+      <div class="clearfix">
+        <button type="button" class="signupbtn" id="btnPrijava">Prijavi se</button>
+        <button type="button" onclick="document.getElementById('login').style.display='none';w3_open();document.getElementById('loginmessage').innerHTML=''" class="cancelbtn">Odustani</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<!-- Sign up form -->
+<div id="signup" class="modal" style="z-index:3">
+  <span onclick="document.getElementById('signup').style.display='none'" class="close" title="Close Modal">&times;</span>
+  <form class="modal-content">
+    <div class="container">
+      <h1>Registracija</h1>
+      <p>Molimo Vas ispunite sljedeće podatke za registraciju!</p>
+      <hr>
+      <label for="username"><b>Username</b></label>
+      <input type="text" placeholder="Enter Username" name="username" required id="usernameR">
+
+      <label for="email"><b>Email</b></label>
+      <input type="text" placeholder="Enter Email" name="email" required id="emailR">
+
+      <label for="psw"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="psw" required id="passwordR">
+
+      <label id="signupmessage"><br><br></label>
+
+      <div class="clearfix">
+        <button type="button" class="signupbtn" id="btnRegistracija">Registriraj se</button>
+        <button type="button" onclick="document.getElementById('signup').style.display='none';w3_open()" class="cancelbtn">Odustani</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script>
+// Script to open and close sidebar
+function w3_open() {
+    document.getElementById("mySidebar").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+}
+
+function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+}
+
+// Get the modal
+var modallogin = document.getElementById('login');
+var modalsignup = document.getElementById('signup');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modallogin) {
+        modallogin.style.display = "none";
+    }
+	if (event.target == modalsignup) {
+        modalsignup.style.display = "none";
+    }
+}
+
+function myAccFunc() {
+    var x = document.getElementById("demoAcc");
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+    } else {
+        x.className = x.className.replace(" w3-show", "");
+    }
+}
+</script>
+
+</body>
+</html>
